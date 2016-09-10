@@ -1,22 +1,22 @@
 import Venice
 
 func ex10() {
-	pd(10, "Iterating Over Channels")
+    print_header(10, "Iterating Over Channels")
 
-	// We can use for in to iterate over values received from a channel. We'll iterate over 2 values in the queue channel.
+    // We can use for in to iterate over values received from a channel. We'll iterate over 2 values in the queue channel.
 
-	let queue =  Channel<String>(bufferSize: 2)
+    let queue =  Channel<String>(bufferSize: 2)
 
-	queue.send("one")
-	queue.send("two")
-	queue.close()
+    queue.send("one")
+    queue.send("two")
+    queue.close()
 
 
-	// This for in loop iterates over each element as it's received from queue. Because we closed the channel above, the iteration terminates after receiving the 2 elements. If we didn't close it we'd block on a 3rd receive in the loop.
+    // This for in loop iterates over each element as it's received from queue. Because we closed the channel above, the iteration terminates after receiving the 2 elements. If we didn't close it we'd block on a 3rd receive in the loop.
 
-	for element in queue {
-		print(element)
-	}
+    for element in queue {
+        print(element)
+    }
 
-	// This example also showed that it’s possible to close a non-empty channel but still have the remaining values be received.
+    // This example also showed that it’s possible to close a non-empty channel but still have the remaining values be received.
 }
